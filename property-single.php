@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if( !isset($_SESSION["login"])){
+  header("Location: index.php");
+}
+
+
+include "koneksi.php";
+
+$id = $_SESSION['id_user'];
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,13 +151,13 @@
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Estate<span class="color-b">Agency</span></a>
+      <a class="navbar-brand text-brand" href="index.php">Estate<span class="color-b">Agency</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a class="nav-link " href="index.html">Home</a>
+            <a class="nav-link " href="index.php">Home</a>
           </li>
 
           <li class="nav-item">
@@ -173,6 +187,9 @@
           <li class="nav-item">
             <a class="nav-link " href="aboutme.html">About Me</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="logout.php">Log Out</a>
+          </li>
         </ul>
       </div>
 
@@ -199,7 +216,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Home</a>
+                  <a href="index.php">Home</a>
                 </li>
                 <li class="breadcrumb-item">
                   <a href="property-grid.html">Properties</a>
@@ -429,33 +446,103 @@
               </div>
               <div class="col-md-12 col-lg-4">
                 <div class="property-contact">
-                  <form class="form-a">
+                  <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
                     <div class="row">
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <input type="text" class="form-control form-control-lg form-control-a" id="inputName" placeholder="Name *" required>
+                          <input type="text" class="form-control form-control-lg form-control-a" name="nama_message" placeholder="Name *" required>
                         </div>
                       </div>
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1" placeholder="Email *" required>
+                          <input type="email" class="form-control form-control-lg form-control-a" name="email" placeholder="Email *" required>
                         </div>
                       </div>
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
+                          <textarea id="textMessage" class="form-control" placeholder="Comment *" name="comment" cols="45" rows="8" required></textarea>
                         </div>
                       </div>
                       <div class="col-md-12 mt-3">
-                        <button type="submit" class="btn btn-a">Send Message</button>
+                      <input type="submit" name="proses" class="btn btn-success" value="Send Message">
                       </div>
                     </div>
                   </form>
+                  
+                  <?php
+
+include 'koneksi.php';
+
+
+if(isset($_POST['proses'])){
+
+$ran = rand();
+
+mysqli_query($koneksi, "INSERT INTO message set
+nama_message = '$_POST[nama_message]',
+email = '$_POST[email]',
+comment = '$_POST[comment]'
+");
+
+    echo "Data berhasil ditambah";
+    echo "<meta http-equiv=refresh content=1;URL='property-single.php'>";
+
+    
+}
+
+
+?>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <br>
+        <div class="card-body">
+
+            
+<div class="table-responsive">
+
+<b>Mesaage </b> 
+  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    
+  <tr>
+<th >Name</th>
+<th >Email</th>
+<th >Comment</th>
+<th style="text-align: center">Aksi</th> 
+</tr>
+
+   
+     
+    <?php
+$data = mysqli_query($koneksi,"SELECT * FROM message");
+
+while($tampil = mysqli_fetch_array($data)){
+
+echo"
+<tr>
+<td>$tampil[nama_message]</td>
+<td>$tampil[email]</td>
+<td>$tampil[comment]</td>";?>
+
+
+<td><input type="button" name="view" value="detail" id_message="<?php echo $tampil["id_message"]; ?>" class="btn btn-info btn-xs view_data" />   
+</td>
+</tr>
+<?php    
+}
+
+?>
+     
+   
+
+  </table>
+
+
+</div>
+</div>
       </div>
     </section><!-- End Property Single-->
 
@@ -557,7 +644,7 @@
           <nav class="nav-footer">
             <ul class="list-inline">
               <li class="list-inline-item">
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
               </li>
               <li class="list-inline-item">
                 <a href="about.html">About</a>

@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if( !isset($_SESSION["login"])){
+  header("Location: login.php");
+}
+
+
+include "koneksi.php"; 
+
+$id = $_SESSION['id_user'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,7 +157,7 @@
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link active" href="index.php">Home</a>
           </li>
 
           <li class="nav-item">
@@ -173,6 +186,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="aboutme.html">About Me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="logout.php">Log Out</a>
           </li>
         </ul>
       </div>
@@ -204,7 +220,7 @@
                       <span class="color-b">35</span> Jl. Seroja, Bintaro  
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="property-single.html"><span class="price-a">SELL | $ 80.000</span></a>
+                      <a href="property-single.php"><span class="price-a">SELL | $ 80.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -228,7 +244,7 @@
                       <span class="color-b">49 </span> Jl. Sutaro, Ciater
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="property-single.html"><span class="price-a">rent | $ 10.000</span></a>
+                      <a href="property-single.php"><span class="price-a">rent | $ 10.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -252,7 +268,7 @@
                       <span class="color-b">12 </span> Jl. delima, Ciater
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="property-single.html"><span class="price-a">rent | $ 8.000</span></a>
+                      <a href="property-single.php"><span class="price-a">rent | $ 8.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -374,7 +390,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">206 Jakarta Barat
+                        <a href="property-single.php">206 Jakarta Barat
                           <br /> Jl. melati</a>
                       </h2>
                     </div>
@@ -422,7 +438,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">157 Jakarta Barat
+                        <a href="property-single.php">157 Jakarta Barat
                           <br /> Jl. Sudirman</a>
                       </h2>
                     </div>
@@ -430,7 +446,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">rent | $ 8.000</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
+                      <a href="property-single.php" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
@@ -470,7 +486,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">35 Jakarta Selatan
+                        <a href="property-single.php">35 Jakarta Selatan
                           <br /> Jl. Seroja, Bintaro  </a>
                       </h2>
                     </div>
@@ -478,7 +494,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">sell | $ 80.000</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
+                      <a href="property-single.php" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
@@ -518,7 +534,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">204 Banten
+                        <a href="property-single.php">204 Banten
                           <br /> Jl. Ahmad Yani</a>
                       </h2>
                     </div>
@@ -526,7 +542,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">Sell | $ 100.000</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
+                      <a href="property-single.php" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
